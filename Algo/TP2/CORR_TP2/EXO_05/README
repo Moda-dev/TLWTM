@@ -1,0 +1,63 @@
+a) Lorsqu'un programme se termine rapidement, alors la non-libération
+n'est pas un "problème".
+Par exemple si 'gcc' ne libère pas la mémoire qu'il a allouée,
+comme la commande se termine rapidement, la mémoire est récupérée.
+
+Le problème arrive pour les programme tournant en parmanence.
+Les démons (par exemple un serveur Web attendant les requêtes
+des internautes) sont lancés au démarrage du système et ne s'arrêtent
+qu'à l'extinction de la machine.
+Or une machine peut tourner plusieurs mois sans redémarrage.
+Si à chaque requête d'un internaute le serveur Web perd quelques
+octets, la mémoire est vite saturée et généralement la machine
+se bloque.
+
+Exemple : à chaque requête le serveur gaspille 10 Ko et il reçoit une requête
+par seconde. Si le serveur possède 16 Go de RAM, celle-ci est
+saturée au bout de 18 jours (et la machine est ralentie bien avant).
+Et si ce sont 100 connexion par seconde, la mémoire est saturée au bout de 4h.
+
+
+
+b)
+$ gcc -Wall -Wextra -pedantic -std=c99 -g -o fuites fuites.c
+$ valgrind --leak-check=full ./fuites
+ 1 ==3892== Memcheck, a memory error detector
+ 2 ==3892== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+ 3 ==3892== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+ 4 ==3892== Command: ./fuites
+ 5 ==3892== 
+ 6 ==3892== 
+ 7 ==3892== HEAP SUMMARY:
+ 8 ==3892==     in use at exit: 132 bytes in 3 blocks
+ 9 ==3892==   total heap usage: 3 allocs, 0 frees, 132 bytes allocated
+10 ==3892== 
+11 ==3892== 12 bytes in 1 blocks are definitely lost in loss record 1 of 3
+12 ==3892==    at 0x4026864: malloc (vg_replace_malloc.c:236)
+13 ==3892==    by 0x80483FF: main (fuites.c:12)
+14 ==3892== 
+15 ==3892== 40 bytes in 1 blocks are definitely lost in loss record 2 of 3
+16 ==3892==    at 0x4026864: malloc (vg_replace_malloc.c:236)
+17 ==3892==    by 0x80483EF: main (fuites.c:11)
+18 ==3892== 
+19 ==3892== 80 bytes in 1 blocks are definitely lost in loss record 3 of 3
+20 ==3892==    at 0x4026864: malloc (vg_replace_malloc.c:236)
+21 ==3892==    by 0x80483D5: f (fuites.c:6)
+22 ==3892==    by 0x8048408: main (fuites.c:13)
+23 ==3892== 
+24 ==3892== LEAK SUMMARY:
+25 ==3892==    definitely lost: 132 bytes in 3 blocks
+26 ==3892==    indirectly lost: 0 bytes in 0 blocks
+27 ==3892==      possibly lost: 0 bytes in 0 blocks
+28 ==3892==    still reachable: 0 bytes in 0 blocks
+29 ==3892==         suppressed: 0 bytes in 0 blocks
+30 ==3892== 
+31 ==3892== For counts of detected and suppressed errors, rerun with: -v
+32 ==3892== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 11 from 6)
+
+ligne 8 : indication des 3 blocs perdus ainsi que la taille totale
+lignes 11-13, 15-17 et 19-22 : une description de chaque fuite.
+    par exemple, lignes 19-22, il est indiqué que le malloc a été fait
+    à la ligne 6 dans la fonction f, fonction qui a été appelée
+    dans le main à la ligne 13
+

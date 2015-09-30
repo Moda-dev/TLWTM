@@ -1,0 +1,40 @@
+public class Leprechaun
+{
+	private String name;
+	private Position pos;
+	private String direction;
+	
+	public Leprechaun()
+	{
+		this.name = "nobody";
+		this.pos = new Position(0, 0);
+		this.direction = "NORD"; 
+	}
+	
+	public Leprechaun( String name, Position p)
+	{
+		this.name = name;
+		this.position = p;
+		this.direction = "NORD";
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public String getDirection()
+	{
+		return this.direction;
+	}
+	
+	public Position getPosition()
+	{
+		return this.position;
+	}
+	
+	public String toString()
+	{
+		return "Name => " + this.name + ".\n Position => " + this.position.toString() + ".\n Direction => " + this.direction + ".\n";
+	}
+}

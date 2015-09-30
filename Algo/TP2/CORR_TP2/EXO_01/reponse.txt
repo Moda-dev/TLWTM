@@ -1,0 +1,22 @@
+Le problème de la gestion implicite de la mémoire est que l'on ne sait
+pas quand l'environnement d'exécution lance le ramasse-miettes.
+
+Or, lorque celui-ci se lance, il peut bloquer le déroulement
+du programme pendant un temps éventuellement long (critère très relatif
+bien entendu).
+
+Pour un programme avec une interface graphique, comme une page web
+dans laquelle vous remplissez un formulaire, cela se traduit par
+un temps de blocage, par exemple d'une demie seconde, que vous
+remarquez à peine. L'incidence est donc sans effet et à peine
+remarqué.
+
+Dans un jeu vidéo, un tel blocage peut conduire à la mort de votre
+personnage qui selon le point de vue est sans importance ou une
+catastrophe nationale.
+
+Dans un programme embarqué temps réel, comme le pilotage automatique
+d'un envion, un "freeze" d'une demie seconde peut retarder
+suffisament une manoeuvre pour conduire à l'accident.
+Pour de tels programme, un mécanisme de ramasse-miettes est à
+procrire (ou du moins à améliorer).

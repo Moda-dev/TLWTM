@@ -1,0 +1,31 @@
+Voici l'affichage avec la commande : valgrind ./tableau
+
+ 1 ==4286== Memcheck, a memory error detector
+ 2 ==4286== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+ 3 ==4286== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+ 4 ==4286== Command: ./tableau
+ 5 ==4286== 
+ 6 la 15e case vaut : 15.4
+ 7 ==4286== 
+ 8 ==4286== HEAP SUMMARY:
+ 9 ==4286==     in use at exit: 0 bytes in 0 blocks
+10 ==4286==   total heap usage: 1 allocs, 1 frees, 400 bytes allocated
+11 ==4286== 
+12 ==4286== All heap blocks were freed -- no leaks are possible
+14 ==4286== 
+13 ==4286== For counts of detected and suppressed errors, rerun with: -v
+15 ==4286== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 11 from 6)
+
+
+ligne 6 : affichage normal du programme
+
+ligne 10 :
+  on a fait un seul malloc et un seul free, pour une quantité totale
+  de 400 octets.
+  Il faut toujours que le nombre de malloc et le nombre de free soient
+  les mêmes.
+
+ligne 12 : indique qu'il n'y a pas de fuite mémoire
+
+ligne 15 : indique le nombre d'erreurs détectées par valgrind ; ce
+   nombre doit être nul.

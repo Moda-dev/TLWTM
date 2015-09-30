@@ -1,0 +1,46 @@
+public class ExempleHMS
+{
+	public static void display1MoreSecond( int h, int m, int s)
+	{
+		// on s'assure que les 3 nombres passés en paramètres représentent bien une heure plausible.	
+		if(h >= 0 && h < 24 && m >= 0 && m < 60 && s >= 0 && s <60)
+		{
+			s++;
+			
+			if( s > 59)
+			{
+				m++;
+				s = 0;
+				
+				if( m > 59)
+				{
+					h++;
+					m = 0;
+					
+					if ( h > 23 )
+					{
+						h = 0;
+						m = 0;
+						s = 0;
+					}
+				} 
+				
+			}
+		
+			System.out.printf("%02d:%02d:%02d\n", h, m, s);
+		}
+		else
+		{
+			System.out.println("Merci de renseigner une heure valide.");
+		}	
+	}
+	
+	public static void main(String[] args)
+	{
+		display1MoreSecond(10, 54, 20);
+		display1MoreSecond(10, 54, 59);
+		display1MoreSecond(10, 59, 59);
+		display1MoreSecond(23, 59, 59);
+		display1MoreSecond(45, 76, 53);
+	}
+}

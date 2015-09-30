@@ -1,0 +1,3 @@
+L'automatisation de la gestion de la mémoire, ne permet pas au programmeur de gérer avec précision la disponibilité de celle-ci.
+Dans des programmes dont la stabilité est critique, cela peut engendrer de gros soucis d'allocation, et mettre en péril l'intégrité de l'application.
+De plus, le lancement du ramasse miette à un moment imopportun peut générer de gros ralentissements dans l'execution du programme, et bloquer l'utilisateur, avec toutes les conséquences néfastes que cela peut impliquer.

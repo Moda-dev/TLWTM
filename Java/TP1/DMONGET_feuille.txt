@@ -1,0 +1,10 @@
+Bonjour, 
+
+oui j'ai déjà travaillé sous Linux. 
+
+/bin/bash
+/home/SP2MI/l3info10
+/usr/local/oracle/app/oracle/product/11.2.0/client_1/sqldeveloper/:/usr/local/oracle/app/oracle/product/11.2.0/client_1/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+test git
+

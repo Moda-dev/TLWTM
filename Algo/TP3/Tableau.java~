@@ -1,0 +1,37 @@
+package tab;
+
+import java.util.Random;
+
+
+public class Tableau
+{
+	private static Random LUCKY;
+
+	private int[] tab;
+	private String nom;
+	
+	public Tableau( int i, String s)
+	{
+		this.tab = new int[i];
+		this.nom = s;
+	}
+	
+	public void initialize(int min, int max)
+	{
+		for(int i = 0; i < this.tab.length ; i++)
+		{
+			int randInt = max*LUCKY.nextInt();
+			if(randInt >= 5)
+			{
+				this.tab[i] = randInt;
+			}
+			else
+			{
+				this.tab[i] = randInt + 5;
+			}
+			
+		}
+	}
+	
+	
+}
